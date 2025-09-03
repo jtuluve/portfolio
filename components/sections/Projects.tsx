@@ -3,16 +3,39 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { projects } from "@/constants/data";
-import { ExternalLink, Github } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, Github } from "lucide-react";
+import { useState } from "react";
 
 export const Projects = () => {
+  const [showAll, setShowAll] = useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const displayedProjects = showAll ? projects : projects.slice(0, 4);
+
   return (
     <section className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl font-bold">Projects</h2>
+          <Button
+            variant="ghost"
+            className="text-lg"
+            onClick={toggleShowAll}
+          >
+            {showAll ? "View Less" : "View More"}
+            {showAll ? (
+              <ChevronUp className="w-5 h-5 ml-1" />
+            ) : (
+              <ChevronDown className="w-5 h-5 ml-1" />
+            )}
+          </Button>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, idx) => (
+          {displayedProjects.map((project, idx) => (
             <Card
               key={idx}
               className="border-2 border-dashed border-[#2D1810] bg-white hover:shadow-lg transition-shadow"
