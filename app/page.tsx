@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@/components/ui/Icon";
+import { experience, projects, skillCategories } from "@/constants/data";
+import Rive from "@rive-app/react-canvas-lite";
 import { ChevronDown, ExternalLink, Github } from "lucide-react";
 
 export default function Home() {
@@ -22,16 +24,13 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-screen px-6 bg-[#FFF3B7]">
-        <div className="flex flex-col items-center max-w-4xl mx-auto">
+        <div className="flex flex-col items-center max-w-7xl mx-auto">
           <div className="flex flex-row h-fit items-end">
-            <div className="flex-shrink-0">
-              <img
-                src="/standing.png"
-                alt="Pixelated character"
-                className="w-32"
-              />
-            </div>
-
+            <Rive
+              src="/animations/hi.riv"
+              className="w-40 h-40"
+              stateMachines="entry"
+            />
             <div className="text-center md:text-left h-fit">
               <p className="text-2xl text-black/60">Hello, I'm</p>
               <h1 className="text-6xl md:text-9xl/[0.8] out tracking-wider [-webkit-text-stroke:2px_white]">
@@ -39,7 +38,7 @@ export default function Home() {
               </h1>
             </div>
           </div>
-          <p className="text-xl text-[#A05500] mb-8 text-right w-full font-bold">
+          <p className="text-2xl text-[#A05500] mb-8 text-right w-full">
             Full Stack Developer
           </p>
         </div>
@@ -54,105 +53,83 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 px-6 min-h-screen">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-3xl font-bold">Skills</h2>
-            <img
-              src="/skills.png"
-              alt="Skills character"
-              className="w-16 h-16"
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Skills</h2>
+          <div className="flex flex-col md:flex-row items-start gap-8 mb-12 justify-between">
+            <div className="flex flex-col gap-8">
+              {skillCategories.map((category) => (
+                <div key={category.category}>
+                  <h3 className="text-xl font-bold mb-4">{category.category}</h3>
+                  <div className="flex flex-wrap gap-4">
+                    {category.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="bg-white border border-dashed border-[#2D1810] p-3 rounded-lg flex items-center gap-2 hover:bg-[#FFB380] transition-colors"
+                      >
+                        <img
+                          src={skill.iconSrc}
+                          alt={skill.name}
+                          className="w-6 h-auto"
+                        />
+                        <span className="text-sm font-medium">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Rive
+              className="min-w-48 h-48 scale-110"
+              src="/animations/boxing.riv"
+              stateMachines="State Machine 1"
             />
-          </div>
-
-          <div className="flex flex-wrap gap-4">
-            {[
-              { name: "JavaScript", iconSrc: "/icons/js.png" },
-              { name: "TypeScript", iconSrc: "/icons/ts.png" },
-              { name: "React", iconSrc: "/icons/react.png" },
-              { name: "Git", iconSrc: "/icons/git.png" },
-              { name: "GitHub", iconSrc: "/icons/github.png" },
-              { name: "MongoDB", iconSrc: "/icons/mongodb.png" },
-              { name: "Socket.IO", iconSrc: "/icons/socket-io.png" },
-              { name: "Tailwind", iconSrc: "/icons/tailwind.png" },
-            ].map((skill) => (
-              <div
-                key={skill.name}
-                className="bg-white border border-dashed border-[#2D1810] p-3 rounded-lg flex items-center gap-2 hover:bg-[#FFB380] transition-colors"
-              >
-                <img src={skill.iconSrc} alt={skill.name} className="w-6 h-6" />
-                <span className="text-sm font-medium">{skill.name}</span>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section className="py-16 px-6 bg-[#F0F0DC]">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-16 px-6 bg-[#fff8d6]">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">Experience</h2>
 
           <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="flex-1 space-y-6">
-              <div className="grid grid-cols-[auto_1fr] gap-2">
-                <div className="h-full w-2 [background-size:100%_!important] [background:url('/pixelated-border.png')]"></div>
-                <div>
-                  <h3 className="text-xl font-bold">
-                    Senior Full Stack Developer
-                  </h3>
-                  <p className="text-[#2D1810]/70 mb-2">
-                    TechCorp Solutions • 2022-Present
-                  </p>
-                  <p className="text-sm leading-relaxed">
-                    Led development of scalable web applications using React,
-                    Node.js, and cloud technologies. Mentored junior developers
-                    and implemented best practices for code quality and
-                    performance.
-                  </p>
+            <div className="flex-1 space-y-10">
+              {experience.map((exp, idx) => (
+                <div className="grid grid-cols-[auto_1fr] gap-6" key={idx}>
+                  {/* Timeline */}
+                  <div className="relative">
+                    <div className="h-full w-1 bg-repeat-y bg-center [background-size:contain] [background-image:url('/pixelated-border.png')]"></div>
+                  </div>
+
+                  {/* Content */}
+                  <div>
+                    {/* Role */}
+                    <h3 className="text-2xl font-bold text-black">
+                      {exp.role}
+                    </h3>
+
+                    {/* Company & duration */}
+                    <div className="mt-1 mb-3 flex flex-col sm:flex-row sm:items-center sm:gap-2 text-sm text-[#2D1810]/70">
+                      <span className="font-semibold">{exp.company}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="italic">{exp.duration}</span>
+                    </div>
+
+                    {/* Short description */}
+                    <p className="text-base leading-relaxed text-[#2D1810]/90">
+                      {exp.shortDesc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-2">
-                <div className="h-full w-2 [background-size:100%_!important] [background:url('/pixelated-border.png')]"></div>
-                <div>
-                  <h3 className="text-xl font-bold">
-                    Senior Full Stack Developer
-                  </h3>
-                  <p className="text-[#2D1810]/70 mb-2">
-                    TechCorp Solutions • 2022-Present
-                  </p>
-                  <p className="text-sm leading-relaxed">
-                    Led development of scalable web applications using React,
-                    Node.js, and cloud technologies. Mentored junior developers
-                    and implemented best practices for code quality and
-                    performance.
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-2">
-                <div className="h-full w-2 [background-size:100%_!important] [background:url('/pixelated-border.png')]"></div>
-                <div>
-                  <h3 className="text-xl font-bold">
-                    Senior Full Stack Developer
-                  </h3>
-                  <p className="text-[#2D1810]/70 mb-2">
-                    TechCorp Solutions • 2022-Present
-                  </p>
-                  <p className="text-sm leading-relaxed">
-                    Led development of scalable web applications using React,
-                    Node.js, and cloud technologies. Mentored junior developers
-                    and implemented best practices for code quality and
-                    performance.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="">
-              <img
-                src="/experience.png"
-                alt="Experience character"
-                className="w-40"
+              <Rive
+                className="min-w-48 h-48 scale-110"
+                src="/animations/experience.riv"
+                stateMachines="State Machine 1"
               />
             </div>
           </div>
@@ -161,140 +138,82 @@ export default function Home() {
 
       {/* Featured Projects */}
       <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="border-2 border-[#2D1810] bg-white hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-[#E8E8E8] h-32 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="text-4xl">🚀</div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">E-Commerce Platform</h3>
-                <p className="text-sm text-[#2D1810]/70 mb-4">
-                  A full-stack e-commerce solution built with React, Node.js,
-                  and PostgreSQL. Features include user authentication, payment
-                  processing, and admin dashboard.
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#FF8C42] hover:bg-[#E67A35] text-white"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    Live Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-[#2D1810] bg-transparent"
-                  >
-                    <Github className="w-4 h-4 mr-1" />
-                    Code
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {projects.map((project, idx) => (
+              <Card
+                key={idx}
+                className="border-2 border-dashed border-[#2D1810] bg-white hover:shadow-lg transition-shadow"
+              >
+                <CardContent className="p-6 grid grid-rows-[auto_auto_auto_1fr_auto] h-[-webkit-fill-available]">
+                  <div className="bg-[#E8E8E8] h-32 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full object-contain"
+                    />
+                  </div>
 
-            <Card className="border-2 border-[#2D1810] bg-white hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-[#E8E8E8] h-32 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="text-4xl">📱</div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">Task Management App</h3>
-                <p className="text-sm text-[#2D1810]/70 mb-4">
-                  A collaborative task management application with real-time
-                  updates, drag-and-drop functionality, and team collaboration
-                  features.
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#FF8C42] hover:bg-[#E67A35] text-white"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    Live Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-[#2D1810] bg-transparent"
-                  >
-                    <Github className="w-4 h-4 mr-1" />
-                    Code
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-sm text-[#2D1810]/70 mb-2">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs bg-[#FFB380] text-white px-2 py-1 rounded"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
-            <Card className="border-2 border-[#2D1810] bg-white hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-[#E8E8E8] h-32 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="text-4xl">🎮</div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">Pixel Art Game</h3>
-                <p className="text-sm text-[#2D1810]/70 mb-4">
-                  A browser-based pixel art adventure game built with HTML5
-                  Canvas and JavaScript. Features include character movement,
-                  collision detection, and level progression.
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#FF8C42] hover:bg-[#E67A35] text-white"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    Play Game
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-[#2D1810] bg-transparent"
-                  >
-                    <Github className="w-4 h-4 mr-1" />
-                    Code
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-[#2D1810] bg-white hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="bg-[#E8E8E8] h-32 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="text-4xl">📊</div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">Analytics Dashboard</h3>
-                <p className="text-sm text-[#2D1810]/70 mb-4">
-                  A comprehensive analytics dashboard with interactive charts,
-                  real-time data visualization, and customizable reporting
-                  features.
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-[#FF8C42] hover:bg-[#E67A35] text-white"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    Live Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-[#2D1810] bg-transparent"
-                  >
-                    <Github className="w-4 h-4 mr-1" />
-                    Code
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  <div></div>
+                  <div className="flex gap-2 justify-between">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        size="sm"
+                        className="bg-black hover:bg-gray-800 text-white cursor-pointer"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-1" />
+                        Live Demo
+                      </Button>
+                    </a>
+                    <a
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        size="sm"
+                        className="border-2 border-black bg-transparent hover:bg-gray-100 text-black cursor-pointer"
+                      >
+                        <Github className="w-4 h-4 mr-1" />
+                        Code
+                      </Button>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
       <section className="py-16 px-6 bg-[#F0F0DC]">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Let's Work Together</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
             I'm always interested in new opportunities and exciting projects.
@@ -304,7 +223,7 @@ export default function Home() {
             <Button
               className="bg-[#FF8C42] hover:bg-[#E67A35] text-white px-8 py-3"
               onClick={() =>
-                (window.location.href = "mailto:jnanesh@example.com")
+                (window.location.href = "mailto:jtuluve+pf@gmail.com")
               }
             >
               Get In Touch
@@ -313,7 +232,7 @@ export default function Home() {
               variant="outline"
               className="border-[#2D1810] px-8 py-3 bg-transparent"
               onClick={() =>
-                window.open("https://linkedin.com/in/jnanesh", "_blank")
+                window.open("https://linkedin.com/in/jtuluve", "_blank")
               }
             >
               LinkedIn
