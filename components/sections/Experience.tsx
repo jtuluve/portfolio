@@ -15,7 +15,7 @@ export const Experience = () => {
               <div className="grid grid-cols-[auto_1fr] gap-6" key={idx}>
                 {/* Timeline */}
                 <div className="relative">
-                  <div className="h-full w-1 bg-repeat-y bg-center [background-size:contain] [background-image:url('/pixelated-border.png')]"></div>
+                  <div className="h-full w-2.5 bg-repeat-y bg-center [background-size:contain] [background-image:url('/pixelated-border.png')]"></div>
                 </div>
 
                 {/* Content */}
