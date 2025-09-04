@@ -12,23 +12,21 @@ export const Contact = () => {
           Let's connect and build something amazing together!
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            className="bg-[#FF8C42] hover:bg-[#E67A35] text-white px-8 py-3"
-            onClick={() =>
-              (window.location.href = "mailto:jtuluve+pf@gmail.com")
-            }
-          >
-            Get In Touch
-          </Button>
-          <Button
-            variant="outline"
-            className="border-[#2D1810] px-8 py-3 bg-transparent"
-            onClick={() =>
-              window.open("https://linkedin.com/in/jtuluve", "_blank")
-            }
-          >
-            LinkedIn
-          </Button>
+          <a href="mailto:jtuluve@gmail.com" target="_blank">
+            <Button
+              className="bg-[#FF8C42] hover:bg-[#E67A35] text-white px-8 py-3"
+            >
+              Get In Touch
+            </Button>
+          </a>
+          <a href="https://linkedin.com/in/jtuluve" target="_blank">
+            <Button
+              variant="outline"
+              className="border-[#2D1810] px-8 py-3 bg-transparent"
+            >
+              LinkedIn
+            </Button>
+          </a>
         </div>
       </div>
     </section>
