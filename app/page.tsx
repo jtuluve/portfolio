@@ -9,6 +9,7 @@ import {
   Hero,
   Projects,
   Skills,
+  Works,
 } from "@/components/sections";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
@@ -36,6 +37,9 @@ export default function Home() {
       </ScrollAnimation>
       <ScrollAnimation animationType="zoomIn">
         <Projects />
+      </ScrollAnimation>
+      <ScrollAnimation animationType="zoomIn">
+        <Works />
       </ScrollAnimation>
       <ScrollAnimation animationType="fadeInUp">
         <Contact />

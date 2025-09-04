@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen px-6 bg-[#FFF3B7]">
+    <section className="flex flex-col items-center justify-center min-h-screen px-6 bg-[#FFF3B7] bg-[url('/bg/bg2.png')] bg-size-[20px]">
       <div className="flex flex-col items-center max-w-7xl mx-auto">
         <div className="flex flex-row h-fit items-end">
           <Rive

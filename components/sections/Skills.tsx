@@ -6,7 +6,7 @@ import Rive from "@rive-app/react-canvas-lite";
 
 export const Skills = () => {
   return (
-    <section className="py-16 px-6">
+    <section className="py-16 px-6 bg-[url('/bg/bg3.png')] bg-size-[20px]">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">Skills</h2>
         <div className="flex flex-col md:flex-row items-start gap-8 mb-12 justify-between">

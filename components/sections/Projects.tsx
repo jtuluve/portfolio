@@ -17,12 +17,12 @@ export const Projects = () => {
   const displayedProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
-    <section className="py-16 px-6">
+    <section className="py-16 px-6 bg-[url('/bg/bg3.png')] bg-size-[20px]">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold">Projects</h2>
           <Button
-            variant="ghost"
+            variant="secondary"
             className="text-lg"
             onClick={toggleShowAll}
           >
@@ -61,7 +61,7 @@ export const Projects = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs bg-[#FFB380] text-white px-2 py-1 rounded"
+                          className="text-xs border border-[#FFB380] px-2 py-1 rounded"
                         >
                           {tech}
                         </span>
@@ -78,7 +78,7 @@ export const Projects = () => {
                     >
                       <Button
                         size="sm"
-                        className="bg-black hover:bg-gray-800 text-white cursor-pointer"
+                        className="bgtext-white cursor-pointer"
                       >
                         <ExternalLink className="w-4 h-4 mr-1" />
                         Live Demo
@@ -91,7 +91,8 @@ export const Projects = () => {
                     >
                       <Button
                         size="sm"
-                        className="border-2 border-black bg-transparent hover:bg-gray-100 text-black cursor-pointer"
+                        className="cursor-pointer"
+                        variant="secondary"
                       >
                         <Github className="w-4 h-4 mr-1" />
                         Code

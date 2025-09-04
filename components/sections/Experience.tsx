@@ -6,7 +6,7 @@ import { ScrollAnimation } from '../ui/scroll-animation';
 
 export const Experience = () => {
   return (
-    <section className="py-16 px-6 bg-[#fff8d6]">
+    <section className="py-16 px-6 bg-[#fff8d6] bg-[url('/bg/bg4.png')] bg-size-[20px]">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">Experience</h2>
 

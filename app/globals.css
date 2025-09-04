@@ -10,10 +10,10 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #d3511e;
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(97.015% 0.00011 271.152 / 0);
+  --secondary-foreground: #d3511e;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -149,4 +149,12 @@
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+.cursor-default {
+  cursor: url(/cur/default.png), default;
+}
+
+.cursor-pointer {
+  cursor: url(/cur/pointer.png) 12 12, pointer;
 }
