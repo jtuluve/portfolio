@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollAnimation } from "../ui/scroll-animation";
 import { skillCategories } from "@/constants/data";
 import Rive from "@rive-app/react-canvas-lite";
 
@@ -15,17 +16,20 @@ export const Skills = () => {
                 <h3 className="text-xl font-bold mb-4">{category.category}</h3>
                 <div className="flex flex-wrap gap-4">
                   {category.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="bg-white border border-dashed border-[#2D1810] p-3 rounded-lg flex items-center gap-2 hover:bg-[#FFB380] transition-colors"
-                    >
-                      <img
-                        src={skill.iconSrc}
-                        alt={skill.name}
-                        className="w-6 h-auto"
-                      />
-                      <span className="text-sm font-medium">{skill.name}</span>
-                    </div>
+                    <ScrollAnimation animationType="zoomIn" key={skill.name}>
+                      <div
+                        className="bg-white border border-dashed border-[#2D1810] p-3 rounded-lg flex items-center gap-2 hover:bg-[#FFB380] transition-colors"
+                      >
+                        <img
+                          src={skill.iconSrc}
+                          alt={skill.name}
+                          className="w-6 h-auto"
+                        />
+                        <span className="text-sm font-medium">
+                          {skill.name}
+                        </span>
+                      </div>
+                    </ScrollAnimation>
                   ))}
                 </div>
               </div>

@@ -10,6 +10,7 @@ import {
   Projects,
   Skills,
 } from "@/components/sections";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 export default function Home() {
   return (
@@ -27,11 +28,21 @@ export default function Home() {
       </div>
 
       <Hero />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Contact />
-      <Footer />
+      <ScrollAnimation animationType="fadeInLeft">
+        <Skills />
+      </ScrollAnimation>
+      <ScrollAnimation animationType="fadeInRight">
+        <Experience />
+      </ScrollAnimation>
+      <ScrollAnimation animationType="zoomIn">
+        <Projects />
+      </ScrollAnimation>
+      <ScrollAnimation animationType="fadeInUp">
+        <Contact />
+      </ScrollAnimation>
+      <ScrollAnimation animationType="fadeInUp">
+        <Footer />
+      </ScrollAnimation>
     </>
   );
 }

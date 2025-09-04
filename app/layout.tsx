@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={pixelifySans.variable}>
-      <body className="font-pixelify antialiased">{children}</body>
+      <body className="font-pixelify antialiased overflow-x-hidden">{children}</body>
     </html>
   )
 }
