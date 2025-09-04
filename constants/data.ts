@@ -258,3 +258,98 @@ export const experience = [
     ],
   },
 ];
+
+
+export const works = [
+  {
+    title: "Aakar 2025",
+    description: "Promotional site for Aakar 2025 Techno-Cultural Fest. Integrated event listings, dynamic schedules, and registration forms with creative branding.",
+    role: "Backend Developer",
+    company: "Kreekarvat Technologies",
+    tools: ["Next.js", "Tailwind CSS", "PostgreSQL", "Prisma ORM", "Supabase", "Auth.js", "TypeScript"],
+    liveUrl: "https://aakar2025.in/",
+    collaborators: ["Gauresh G Pai"],
+    imageUrl: "/works/aakar.png"
+  },
+  {
+    title: "ExamsMitra",
+    description: "Multi-purpose educational platform offering academic resources, exam schedules, and student services. Built responsive pages and components for optimized mobile experience.",
+    role: "Backend Developer",
+    company: "Kreekarvat Technologies",
+    tools: ["Next.js", "Tailwind CSS", "Prisma ORM", "PostgreSQL", "Supabase", "Auth.js", "TypeScript"],
+    liveUrl: "https://www.examsmitra.com/",
+    collaborators: ["Gauresh G Pai", "Harshitha", "Dhanya", "Yashas"],
+    imageUrl: "/works/examsmitra.png"
+  },
+  {
+    title: "SVS Temple PU College",
+    description: "Official website for SVS Temple PU College. Developed a clean and informative layout to present academic offerings, staff information, and admission details. Prioritized performance and responsive design.",
+    role: "Backend Developer",
+    company: "Kreekarvat Technologies",
+    tools: ["Next.js", "Tailwind CSS", "Prisma ORM", "Supabase", "PostgreSQL", "Auth.js", "TypeScript"],
+    liveUrl: "https://svstpu.edu.in",
+    collaborators: ["Gauresh G Pai", "Nidhi D"],
+    imageUrl: "/works/svstpu.png"
+  },
+  {
+    title: "Marketing Tool",
+    description: "Campaign manager for SMS, email, and WhatsApp marketing with real-time analytics. Built to help small businesses track performance and ROI.",
+    role: "Volunteer Tool Developer",
+    company: "Billmaxo Solutions",
+    tools: ["Node.js", "WhatsApp-Web.js", "Puppeteer", "Express.js"],
+    liveUrl: null,
+    collaborators: ["Gauresh G Pai"],
+    imageUrl: "/placeholder.png"
+  },
+  {
+    title: "AJIMS Employee Management Portal",
+    description: "An internal web portal developed for AJ Institute of Medical Sciences to manage employee data efficiently. Features include department-wise access, attendance tracking, role-based permissions, and intuitive UI for HR and administrative tasks.",
+    role: "Full Stack Developer",
+    company: "AJIMS",
+    tools: ["Next.js", "Tailwind CSS", "MongoDB"],
+    liveUrl: "https://ajims.vercel.app",
+    collaborators: ["Gauresh G Pai", "Vikram", "Jyothi", "Nidhi Jadav", "Himanshu Hegde", "Milan C I"],
+    imageUrl: "/works/emp.png"
+  },
+  {
+    title: "WhatsApp Integration Tool",
+    description: "Tool to send digital receipts, order updates, and offers through WhatsApp Business API to improve customer engagement.",
+    role: "Volunteer Tool Developer",
+    company: "Billmaxo Solutions",
+    tools: ["WhatsApp API", "Node.js", "Puppeteer", "Express.js"],
+    liveUrl: null,
+    collaborators: ["Gauresh G Pai"],
+    imageUrl: "/placeholder.png"
+  },
+  {
+    title: "Swiggy Integration Tool",
+    description: "Utility to synchronize restaurant orders from Swiggy with Billmaxo POS for real-time billing, eliminating manual entries and reducing delays.",
+    role: "Volunteer Tool Developer",
+    company: "Billmaxo Solutions",
+    tools: ["Node.js", "Puppeteer", "Express.js"],
+    liveUrl: null,
+    collaborators: ["Gauresh G Pai"],
+    imageUrl: "/placeholder.png"
+  },
+  {
+    title: "SVS Temple English Medium School",
+    description: "Official website for SVS Temple English Medium School. Developed a clean and informative layout to present academic offerings, staff information, and admission details. Prioritized performance and responsive design.",
+    role: "Backend Developer",
+    company: "Kreekarvat Technologies",
+    tools: ["Next.js", "Tailwind CSS", "Prisma ORM", "Supabase", "PostgreSQL", "Auth.js", "TypeScript"],
+    liveUrl: "https://svstpu.edu.in",
+    collaborators: ["Gauresh G Pai", "Nidhi D", "Himanshu Hegde", "Milan C I"],
+    imageUrl: "/works/svstems.png"
+  },
+  {
+    title: "Zomato Integration Tool",
+    description: "Automated order fetching and synchronization tool for restaurants using Zomato, integrated directly with billing systems.",
+    role: "Volunteer Tool Developer",
+    company: "Billmaxo Solutions",
+    tools: ["Node.js", "Puppeteer", "Express.js"],
+    liveUrl: null,
+    collaborators: ["Gauresh G Pai"],
+    imageUrl: "/works/placeholder.png"
+  }
+]
+;
