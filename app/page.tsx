@@ -35,10 +35,10 @@ export default function Home() {
       <ScrollAnimation animationType="fadeInRight">
         <Experience />
       </ScrollAnimation>
-      <ScrollAnimation animationType="zoomIn">
+      <ScrollAnimation animationType="fadeInUp">
         <Projects />
       </ScrollAnimation>
-      <ScrollAnimation animationType="zoomIn">
+      <ScrollAnimation animationType="fadeInUp">
         <Works />
       </ScrollAnimation>
       <ScrollAnimation animationType="fadeInUp">

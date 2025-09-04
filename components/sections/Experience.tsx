@@ -10,7 +10,7 @@ export const Experience = () => {
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">Experience</h2>
 
-        <div className="flex flex-col md:flex-row items-start gap-8">
+        <div className="flex flex-col-reverse md:flex-row items-start gap-8">
           <div className="flex-1 space-y-10">
             {experience.map((exp, idx) => (
               <ScrollAnimation key={idx} delay={idx * 0.2}>
@@ -44,7 +44,7 @@ export const Experience = () => {
             ))}
           </div>
 
-          <div className="">
+          <div className="mx-auto">
             <Rive
               className="min-w-48 h-48 scale-110"
               src="/animations/experience.riv"
