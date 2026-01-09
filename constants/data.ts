@@ -349,7 +349,7 @@ export const works = [
     tools: ["Node.js", "Puppeteer", "Express.js"],
     liveUrl: null,
     collaborators: ["Gauresh G Pai"],
-    imageUrl: "/works/placeholder.png"
+    imageUrl: "/placeholder.png"
   }
 ]
 ;
