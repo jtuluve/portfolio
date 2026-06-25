@@ -10,10 +10,10 @@ export const Skills = () => {
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold mb-8">Skills</h2>
         <div className="flex flex-col-reverse md:flex-row items-start gap-8 mb-12 justify-between">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
             {skillCategories.map((category) => (
               <div key={category.category}>
-                <h3 className="text-xl font-bold mb-4">{category.category}</h3>
+                <h3 className="text-xl font-bold mb-2">{category.category}</h3>
                 <div className="flex flex-wrap gap-4">
                   {category.skills.map((skill) => (
                     <ScrollAnimation animationType="zoomIn" key={skill.name}>

@@ -14,28 +14,14 @@ export const Works = () => {
     setShowAll(!showAll);
   };
 
-  const displayedWorks = showAll ? works : works.slice(0, 4);
+  const displayedWorks = showAll ? works : works.slice(0, 6);
 
   return (
     <section className="py-16 px-6 bg-[url('/bg/bg3.png')] bg-size-[20px]">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold">Works</h2>
-          <Button
-            variant="secondary"
-            className="text-lg"
-            onClick={toggleShowAll}
-          >
-            {showAll ? "View Less" : "View More"}
-            {showAll ? (
-              <ChevronUp className="w-5 h-5 ml-1" />
-            ) : (
-              <ChevronDown className="w-5 h-5 ml-1" />
-            )}
-          </Button>
-        </div>
+        <h2 className="text-3xl font-bold mb-8">Works</h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedWorks.map((work, idx) => (
             <ScrollAnimation key={idx} delay={idx * 0.1}>
               <Card className="border-2 border-dashed border-[#2D1810] bg-white hover:shadow-lg transition-shadow h-[-webkit-fill-available]">
@@ -106,6 +92,21 @@ export const Works = () => {
               </Card>
             </ScrollAnimation>
           ))}
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <Button
+            variant="secondary"
+            className="text-lg"
+            onClick={toggleShowAll}
+          >
+            {showAll ? "View Less" : "View More"}
+            {showAll ? (
+              <ChevronUp className="w-5 h-5 ml-1" />
+            ) : (
+              <ChevronDown className="w-5 h-5 ml-1" />
+            )}
+          </Button>
         </div>
       </div>
     </section>

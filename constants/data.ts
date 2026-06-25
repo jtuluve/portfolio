@@ -226,13 +226,30 @@ export const skillCategories = [
 
 export const experience = [
   {
-    role: "Full Stack Developer Intern",
-    company: "A J Institute of Medical Sciences and Research Center, Mangaluru",
-    duration: "Sept 2023 - Aug 2024",
+    role: "Software Engineer",
+    company: "Manasija AI, Mangaluru",
+    duration: "May 2026 - Present",
     shortDesc:
-      "Developed a faculty appraisal management web application using modern web technologies.",
+      "Building and maintaining production-ready software solutions, designing APIs, and integrating artificial intelligence technologies.",
+    points: [],
+  },
+  {
+    role: "SWE Intern",
+    company: "Manasija AI, Mangaluru",
+    duration: "Feb 2026 - Apr 2026",
+    shortDesc:
+      "Collaborated on software development tasks, working on front-end components and building backend services.",
+    points: [],
+  },
+  {
+    role: "Freelance Software Developer",
+    company: "BillMaxo Solutions, Bengaluru",
+    duration: "Jan 2025 - Jun 2025",
+    shortDesc:
+      "Developed automation tools and APIs for WhatsApp marketing and food delivery integrations.",
     points: [
-      "Developed 'Faculty Appraisal Forum' software, a web application utilizing React, Next.js, Auth.js, MongoDB, and Firebase Storage.",
+      "Developed a WhatsApp Marketing API using Express.js, Puppeteer, and whatsapp-web.js.",
+      "Built Swiggy and Zomato integration tools for automated order scraping and restaurant data insights.",
     ],
   },
   {
@@ -247,14 +264,13 @@ export const experience = [
     ],
   },
   {
-    role: "Freelance Software Developer",
-    company: "BillMaxo Solutions, Bengaluru",
-    duration: "Jan 2025 - Jun 2025",
+    role: "Software Engineer Intern",
+    company: "A J Institute of Medical Sciences and Research Center, Mangaluru",
+    duration: "Sept 2023 - Aug 2024",
     shortDesc:
-      "Developed automation tools and APIs for WhatsApp marketing and food delivery integrations.",
+      "Developed a faculty appraisal management web application using modern web technologies.",
     points: [
-      "Developed a WhatsApp Marketing API using Express.js, Puppeteer, and whatsapp-web.js.",
-      "Built Swiggy and Zomato integration tools for automated order scraping and restaurant data insights.",
+      "Developed 'Faculty Appraisal Forum' software, a web application utilizing React, Next.js, Auth.js, MongoDB, and Firebase Storage.",
     ],
   },
 ];
@@ -304,7 +320,7 @@ export const works = [
   {
     title: "AJIMS Employee Management Portal",
     description: "An internal web portal developed for AJ Institute of Medical Sciences to manage employee data efficiently. Features include department-wise access, attendance tracking, role-based permissions, and intuitive UI for HR and administrative tasks.",
-    role: "Full Stack Developer",
+    role: "Software Engineer",
     company: "AJIMS",
     tools: ["Next.js", "Tailwind CSS", "MongoDB"],
     liveUrl: "https://ajims.vercel.app",

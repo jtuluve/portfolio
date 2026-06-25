@@ -21,14 +21,14 @@ export const Hero = () => {
           </div>
         </div>
         <p className="text-2xl text-[#A05500] mb-8 text-right w-full">
-          Full Stack Developer
+          Software Engineer
         </p>
       </div>
 
       <ChevronDown className="w-8 h-8 mt-12 animate-bounce absolute bottom-8 animation-duration-1200 z-20" />
       <div className="bg-[#FFB380] p-4 rounded-lg w-80 absolute bottom-0 md:translate-y-1/2 -translate-y-1/2 md:right-16 animate-float border border-dashed border-amber-600 z-10">
         <p className="text-md leading-relaxed">
-          A passionate Full Stack Developer solving real-world problems using
+          A passionate Software Engineer solving real-world problems using
           cutting-edge technologies.
         </p>
       </div>

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Pixelify_Sans } from "next/font/google"
 import "./globals.css"
 import LoadingScreen from "@/components/ui/loading-screen"
+import { LoadingProvider } from "@/components/loading-provider"
 
 const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
@@ -24,8 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={pixelifySans.variable}>
       <body className="font-pixelify antialiased overflow-x-hidden cursor-default">
-        <LoadingScreen />
-        {children}
+        <LoadingProvider>
+          <LoadingScreen />
+          {children}
+        </LoadingProvider>
       </body>
     </html>
   )
