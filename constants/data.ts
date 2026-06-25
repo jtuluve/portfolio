@@ -264,7 +264,7 @@ export const experience = [
     ],
   },
   {
-    role: "Software Engineer Intern",
+    role: "Full Stack Developer Intern",
     company: "A J Institute of Medical Sciences and Research Center, Mangaluru",
     duration: "Sept 2023 - Aug 2024",
     shortDesc:
