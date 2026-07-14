@@ -1,9 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Pixelify_Sans } from "next/font/google"
+import { Pixelify_Sans, Saira } from "next/font/google"
 import "./globals.css"
 import LoadingScreen from "@/components/ui/loading-screen"
 import { LoadingProvider } from "@/components/loading-provider"
+
+const saira = Saira({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+})
 
 const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
@@ -23,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={pixelifySans.variable}>
+    <html lang="en" className={`${saira.variable} ${pixelifySans.variable}`}>
       <body className="font-pixelify antialiased overflow-x-hidden cursor-default">
         <LoadingProvider>
           <LoadingScreen />

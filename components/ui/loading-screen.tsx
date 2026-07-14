@@ -1,9 +1,16 @@
 "use client";
 import React from "react";
+import { usePathname } from "next/navigation";
 import { useLoading } from "@/components/loading-provider";
 
 const LoadingScreen = () => {
   const { loading } = useLoading();
+  const pathname = usePathname();
+
+  if (pathname === "/minimal" || pathname.startsWith("/minimal/")) {
+    return null;
+  }
+
   return (
     <div className={"fixed inset-0 bg-white flex items-center justify-center z-50" + (loading ? "" : " hidden")}>
       <style>

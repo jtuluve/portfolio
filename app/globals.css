@@ -117,6 +117,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-pixelify: var(--font-pixelify);
+  --font-sans: var(--font-sans);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -157,4 +158,15 @@ html {
 
 .cursor-pointer {
   cursor: url(/cur/pointer.png) 12 12, pointer;
+}
+
+body:has(.minimal-page) {
+  cursor: default;
+}
+
+.minimal-page .cursor-pointer,
+.minimal-page a,
+.minimal-page button,
+.minimal-page summary {
+  cursor: pointer;
 }

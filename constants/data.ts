@@ -227,7 +227,8 @@ export const skillCategories = [
 export const experience = [
   {
     role: "Software Engineer",
-    company: "Manasija AI, Mangaluru",
+    company: "Manasija, Mangaluru",
+    logoSrc: "/logos/manasija.svg",
     duration: "May 2026 - Present",
     shortDesc:
       "Building and maintaining production-ready software solutions, designing APIs, and integrating artificial intelligence technologies.",
@@ -235,7 +236,8 @@ export const experience = [
   },
   {
     role: "SWE Intern",
-    company: "Manasija AI, Mangaluru",
+    company: "Manasija, Mangaluru",
+    logoSrc: "/logos/manasija.svg",
     duration: "Feb 2026 - Apr 2026",
     shortDesc:
       "Collaborated on software development tasks, working on front-end components and building backend services.",
@@ -244,6 +246,7 @@ export const experience = [
   {
     role: "Freelance Software Developer",
     company: "BillMaxo Solutions, Bengaluru",
+    logoSrc: "/logos/billmaxo.jpg",
     duration: "Jan 2025 - Jun 2025",
     shortDesc:
       "Developed automation tools and APIs for WhatsApp marketing and food delivery integrations.",
@@ -255,6 +258,7 @@ export const experience = [
   {
     role: "Freelance Web Developer",
     company: "Kreekarvat Technologies, Mangaluru",
+    logoSrc: "/logos/kreekarvat.jpg",
     duration: "Nov 2024 - Mar 2025",
     shortDesc:
       "Built 2 responsive websites for SVST institutions using modern web technologies, attracting 5,000+ visitors and enhancing digital presence.",
@@ -266,6 +270,7 @@ export const experience = [
   {
     role: "Full Stack Developer Intern",
     company: "A J Institute of Medical Sciences and Research Center, Mangaluru",
+    logoSrc: "/logos/ajims.jpg",
     duration: "Sept 2023 - Aug 2024",
     shortDesc:
       "Developed a faculty appraisal management web application using modern web technologies.",
