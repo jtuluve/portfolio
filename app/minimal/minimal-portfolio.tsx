@@ -2,131 +2,127 @@
 
 import { experience, projects, works } from "@/constants/data";
 import Lenis from "lenis";
-import { Award, Moon, Sun } from "lucide-react";
+import {
+  ChevronDown,
+  Code,
+  Moon,
+  SquareArrowOutUpRight,
+  Sun,
+} from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 const coreSkills = ["Python", "JavaScript", "TypeScript", "Next.js", "MongoDB"];
-const initialProjectCount = 4;
-const initialWorkCount = 4;
-const initialAchievementCount = 6;
+const initialProjectCount = 3;
+const initialWorkCount = 3;
+const initialAchievementCount = 4;
 const themeStorageKey = "minimal-theme";
 
-type AchievementPlace = "1st" | "2nd" | "3rd" | "honor";
+const minimalProjectDescriptions: Record<string, string> = {
+  Genasiri: "Tulu script transliteration tool.",
+  Musyncc: "Synchronized music listening.",
+  EZOrder: "Fast food-ordering web app.",
+  "Centralized Hospital Resource Management System":
+    "Real-time hospital resource coordination.",
+  "Express Documentation Generator (create-express-doc)":
+    "Express API docs generator.",
+  LiteKV: "Lightweight key-value client.",
+  "LiteKV-api": "Persistent key-value storage API.",
+  AniPortal: "Anime discovery and list manager.",
+  Telebaravu: "Tulu script image bot.",
+  "🤖 Robin-San Bot": "Anime updates Telegram bot.",
+  "Anywhere Tulu": "Embeddable Tulu transliteration.",
+  Emage: "Emoji mosaic image converter.",
+  "Two Cars Game": "Dual-control reflex game.",
+  "That Snake Again": "Classic Snake remake.",
+};
+
+const minimalWorkDescriptions: Record<string, string> = {
+  "Aakar 2025": "Tech fest website.",
+  ExamsMitra: "Educational services platform.",
+  "SVS Temple PU College": "College website.",
+  "Marketing Tool": "Campaign and analytics manager.",
+  "AJIMS Employee Management Portal": "Internal HR portal.",
+  "WhatsApp Integration Tool": "WhatsApp customer updates.",
+  "Swiggy Integration Tool": "POS order synchronization.",
+  "SVS Temple English Medium School": "School website.",
+  "Zomato Integration Tool": "Automated restaurant order sync.",
+};
 
 const achievements: Array<{
   result: string;
   title: string;
   context: string;
-  category: string;
-  place: AchievementPlace;
 }> = [
   {
     result: "Second runner-up",
-    title: "Ainnovation 2025",
+    title: "Ainnovation 2025 Hackathon",
     context:
       "24-hour national-level hackathon conducted by Microsoft, Kyndryl, and NMAMIT, Nitte.",
-    category: "Hackathon",
-    place: "3rd",
   },
   {
     result: "Second runner-up",
     title: "Cardano Asia Hackathon 2025",
     context: "36-hour blockchain hackathon.",
-    category: "Hackathon",
-    place: "3rd",
   },
   {
     result: "Runner-up",
-    title: "HackToFuture 4.0",
+    title: "HackToFuture 4.0 Hackathon",
     context: "24-hour hackathon organized by SJEC and EG.",
-    category: "Hackathon",
-    place: "2nd",
   },
   {
     result: "First place",
     title: "Debugging at Aakar 2025",
     context: "Competitive debugging event.",
-    category: "Coding",
-    place: "1st",
   },
   {
     result: "First place",
     title: "Blind Coding at Aakar 2025",
     context: "Programming contest focused on accuracy without visual feedback.",
-    category: "Coding",
-    place: "1st",
   },
   {
     result: "Runner-up",
     title: "Code Hunters at Yukti 2025",
     context: "VTU coding competition.",
-    category: "Coding",
-    place: "2nd",
   },
   {
     result: "Second place",
     title: "Code Resurrect at Varnothsava 2025",
     context: "SMVITM programming event.",
-    category: "Coding",
-    place: "2nd",
   },
   {
     result: "Second place",
     title: "Web Designing at Saavishkar",
     context: "MIT Kundapura web design competition.",
-    category: "Design",
-    place: "2nd",
   },
   {
     result: "First place",
     title: "Error Debugging at Saavishkar",
     context: "Debugging competition.",
-    category: "Coding",
-    place: "1st",
   },
   {
     result: "First place",
     title: "Debugging at Aakar 2024",
     context: "AJIET debugging event.",
-    category: "Coding",
-    place: "1st",
   },
   {
     result: "Award recipient",
     title: "Siri Chavadi Puraskara 2022",
     context:
       "Recognized by the Karnataka Tulu Sahitya Academy for contributions to the Unicode proposal for the Tulu script.",
-    category: "Recognition",
-    place: "honor",
   },
   {
     result: "Multiple honors",
     title: "Tulu script tools",
     context: "Recognized for tools that help preserve and promote the Tulu script.",
-    category: "Recognition",
-    place: "honor",
   },
   {
     result: "Workshop lead",
     title: "Peer mentoring",
     context:
       "Conducted workshops on Git, GitHub, MongoDB, and UiPath with practical industry workflows.",
-    category: "Mentorship",
-    place: "honor",
   },
 ];
-
-const achievementBadgeStyles: Record<AchievementPlace, string> = {
-  "1st":
-    "bg-amber-100 text-amber-800 ring-amber-200 dark:bg-amber-400/15 dark:text-amber-200 dark:ring-amber-400/25",
-  "2nd":
-    "bg-slate-100 text-slate-800 ring-slate-200 dark:bg-slate-400/15 dark:text-slate-200 dark:ring-slate-400/25",
-  "3rd":
-    "bg-orange-100 text-orange-800 ring-orange-200 dark:bg-orange-400/15 dark:text-orange-200 dark:ring-orange-400/25",
-  honor:
-    "bg-zinc-100 text-zinc-700 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:ring-zinc-700",
-};
 
 function ExternalLink({
   href,
@@ -147,11 +143,36 @@ function ExternalLink({
   );
 }
 
+function IconLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      title={label}
+      className="inline-flex size-6 items-center justify-center rounded text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+    >
+      {children}
+      <span className="sr-only">{label}</span>
+    </a>
+  );
+}
+
 export default function MinimalPortfolio() {
   const [isDark, setIsDark] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllWorks, setShowAllWorks] = useState(false);
   const [showAllAchievements, setShowAllAchievements] = useState(false);
+  const [expandedExperience, setExpandedExperience] = useState<string | null>(null);
   const [preview, setPreview] = useState<{
     src: string;
     y: number;
@@ -258,15 +279,47 @@ export default function MinimalPortfolio() {
           </div>
         </header>
 
+        
+        <section className="border-b border-zinc-300 py-8 dark:border-zinc-700">
+          <h2 className="font-pixelify text-2xl font-semibold">Skills</h2>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {coreSkills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 dark:border-zinc-700 dark:text-zinc-200"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+
         <section className="border-b border-zinc-300 py-8 dark:border-zinc-700">
           <h2 className="font-pixelify text-2xl font-semibold">Experience</h2>
           <div className="mt-5 space-y-3">
-            {experience.map((item) => (
-              <details
-                key={`${item.role}-${item.company}`}
-                className="group -mx-3 rounded border-b border-zinc-200 px-3 py-3 transition-colors hover:bg-zinc-50 last:border-b-0 dark:border-zinc-800 dark:hover:bg-zinc-900"
-              >
-                <summary className="flex cursor-pointer list-none flex-col gap-1 marker:hidden sm:flex-row sm:items-start sm:justify-between">
+            {experience.map((item) => {
+              const experienceKey = `${item.role}-${item.company}`;
+              const isExpanded = expandedExperience === experienceKey;
+
+              return (
+                <details
+                  key={experienceKey}
+                  open={isExpanded}
+                  className="-mx-3 rounded border-b border-zinc-200 px-3 py-3 transition-colors hover:bg-zinc-50 last:border-b-0 dark:border-zinc-800 dark:hover:bg-zinc-900"
+                >
+                  <summary
+                    className="relative flex cursor-pointer list-none flex-col gap-1 pr-4 marker:hidden sm:flex-row sm:items-start sm:justify-between"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setExpandedExperience((value) =>
+                        value === experienceKey ? null : experienceKey,
+                      );
+                    }}
+                  >
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute right-0 top-1 size-4 shrink-0 text-zinc-500 transition-transform duration-150 mt-[3px] ${isExpanded ? "rotate-180 text-zinc-700 dark:text-zinc-200" : "text-zinc-500 dark:text-zinc-400"}`}
+                  />
                   <div>
                     <h3 className="text-lg font-semibold">{item.role}</h3>
                     <p className="mt-1 flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
@@ -295,7 +348,8 @@ export default function MinimalPortfolio() {
                   ) : null}
                 </div>
               </details>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -303,37 +357,18 @@ export default function MinimalPortfolio() {
           <h2 className="font-pixelify text-2xl font-semibold">
             Achievements
           </h2>
-          <div className="mt-5 grid gap-3">
+          <div className="mt-5 space-y-5">
             {visibleAchievements.map((achievement) => (
               <article
                 key={`${achievement.result}-${achievement.title}`}
-                className="-mx-3 grid gap-3 border-b border-zinc-200 px-3 py-3 transition-colors last:border-b-0 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 sm:grid-cols-[10rem_1fr]"
+                className="max-w-2xl"
               >
-                <div className="flex items-start gap-2">
-                  <span
-                    className={`mt-1 inline-flex size-7 shrink-0 items-center justify-center rounded ring-1 ${
-                      achievementBadgeStyles[achievement.place]
-                    }`}
-                  >
-                    <Award className="size-3.5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-                      {achievement.result}
-                    </p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-500">
-                      {achievement.category}
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-zinc-950 dark:text-zinc-50">
-                    {achievement.title}
-                  </h3>
-                  <p className="mt-1 leading-7 text-zinc-700 dark:text-zinc-300">
-                    {achievement.context}
-                  </p>
-                </div>
+                <h3 className="text-base font-semibold leading-7 text-zinc-950 dark:text-zinc-50">
+                  {achievement.result} - {achievement.title}
+                </h3>
+                <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
+                  {achievement.context}
+                </p>
               </article>
             ))}
           </div>
@@ -346,20 +381,6 @@ export default function MinimalPortfolio() {
               {showAllAchievements ? "View less" : "View more"}
             </button>
           ) : null}
-        </section>
-
-        <section className="border-b border-zinc-300 py-8 dark:border-zinc-700">
-          <h2 className="font-pixelify text-2xl font-semibold">Skills</h2>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {coreSkills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 dark:border-zinc-700 dark:text-zinc-200"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
         </section>
 
         <section className="border-b border-zinc-300 py-8 dark:border-zinc-700">
@@ -376,17 +397,27 @@ export default function MinimalPortfolio() {
                 }
                 onMouseLeave={() => setPreview(null)}
               >
-                <h3 className="text-lg font-semibold">{project.title}</h3>
-                <p className="mt-2 leading-7 text-zinc-800 dark:text-zinc-200">
-                  {project.description}
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold">{project.title}</h3>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <IconLink href={project.liveUrl} label="Live">
+                      <SquareArrowOutUpRight
+                        className="size-3.5"
+                        aria-hidden="true"
+                      />
+                    </IconLink>
+                    <IconLink href={project.codeUrl} label="Code">
+                      <Code className="size-3.5" aria-hidden="true" />
+                    </IconLink>
+                  </div>
+                </div>
+                <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
+                  {minimalProjectDescriptions[project.title] ??
+                    project.description}
                 </p>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   {project.technologies.join(", ")}
                 </p>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                  <ExternalLink href={project.liveUrl}>Live</ExternalLink>
-                  <ExternalLink href={project.codeUrl}>Code</ExternalLink>
-                </div>
               </article>
             ))}
           </div>
@@ -415,21 +446,28 @@ export default function MinimalPortfolio() {
                 }
                 onMouseLeave={() => setPreview(null)}
               >
-                <h3 className="text-lg font-semibold">{work.title}</h3>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold">{work.title}</h3>
+                  {work.liveUrl ? (
+                    <div className="flex shrink-0 items-center gap-2">
+                      <IconLink href={work.liveUrl} label="Live">
+                        <SquareArrowOutUpRight
+                          className="size-3.5"
+                          aria-hidden="true"
+                        />
+                      </IconLink>
+                    </div>
+                  ) : null}
+                </div>
                 <p className="mt-1 text-zinc-700 dark:text-zinc-300">
                   {work.company}
                 </p>
-                <p className="mt-2 leading-7 text-zinc-800 dark:text-zinc-200">
-                  {work.description}
+                <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
+                  {minimalWorkDescriptions[work.title] ?? work.description}
                 </p>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   {work.tools.join(", ")}
                 </p>
-                {work.liveUrl ? (
-                  <div className="mt-2 text-sm">
-                    <ExternalLink href={work.liveUrl}>Live</ExternalLink>
-                  </div>
-                ) : null}
               </article>
             ))}
           </div>
