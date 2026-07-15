@@ -1,6 +1,7 @@
 "use client";
 
 import { experience, projects, works } from "@/constants/data";
+import Lenis from "lenis";
 import { Award, Moon, Sun } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -199,6 +200,25 @@ export default function MinimalPortfolio() {
 
     mediaQuery.addEventListener("change", syncSystemTheme);
     return () => mediaQuery.removeEventListener("change", syncSystemTheme);
+  }, []);
+
+  useEffect(() => {
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (reducedMotionQuery.matches) {
+      return;
+    }
+
+    const lenis = new Lenis({
+      anchors: true,
+      autoRaf: true,
+      lerp: 0.08,
+      wheelMultiplier: 0.9,
+    });
+
+    return () => lenis.destroy();
   }, []);
 
   return (
