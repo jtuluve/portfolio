@@ -244,6 +244,15 @@ export const experience = [
     points: [],
   },
   {
+    role: "Software Engineer Intern",
+    company: "Government of Karnataka, Mangaluru",
+    logoSrc: "/logos/karnataka.svg",
+    duration: "Aug 2025 - Nov 2025",
+    shortDesc:
+      "Completed a 4-month hybrid internship with the Government of Karnataka in Mangaluru, contributing to software engineering work in a public-sector environment.",
+    points: [],
+  },
+  {
     role: "Freelance Software Developer",
     company: "BillMaxo Solutions, Bengaluru",
     logoSrc: "/logos/billmaxo.jpg",
