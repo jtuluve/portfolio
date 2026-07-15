@@ -9,6 +9,7 @@ import {
   SquareArrowOutUpRight,
   Sun,
 } from "lucide-react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
@@ -266,9 +267,19 @@ export default function MinimalPortfolio() {
           <p className="mb-2 text-sm uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-400">
             Portfolio
           </p>
-          <h1 className="font-pixelify text-4xl font-semibold tracking-tight md:text-5xl">
-            Jnanesh
-          </h1>
+          <div className="flex items-center gap-4">
+            <Image
+              src="/me.png"
+              alt="Profile picture of Jnanesh"
+              width={64}
+              height={64}
+              className="h-16 w-16 rounded-full border border-zinc-300 object-cover dark:border-zinc-600"
+              priority
+            />
+            <h1 className="font-pixelify text-4xl font-semibold tracking-tight md:text-5xl">
+              Jnanesh
+            </h1>
+          </div>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
             Software engineer building full-stack web applications, backend
             services, automation tools, and developer utilities.
