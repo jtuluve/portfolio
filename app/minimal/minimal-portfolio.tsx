@@ -13,7 +13,13 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
-const coreSkills = ["Python", "JavaScript", "TypeScript", "Next.js", "MongoDB"];
+const coreSkills = [
+  { name: "Python", hoverBg: "hover:bg-[#ecf3ff]" },
+  { name: "JavaScript", hoverBg: "hover:bg-[#fffef3]" },
+  { name: "TypeScript", hoverBg: "hover:bg-[#edf2ff]" },
+  { name: "Next.js", hoverBg: "hover:bg-[#f6f6ff]" },
+  { name: "MongoDB", hoverBg: "hover:bg-[#effbf3]" },
+];
 const initialProjectCount = 3;
 const initialWorkCount = 3;
 const initialAchievementCount = 4;
@@ -128,18 +134,61 @@ const achievements: Array<{
 function ExternalLink({
   href,
   children,
+  animated = false,
+  className = "",
 }: {
   href: string;
   children: ReactNode;
+  animated?: boolean;
+  className?: string;
 }) {
+  if (!animated) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className={`underline underline-offset-4 hover:no-underline ${className}`}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  const letters = typeof children === "string" ? children.split("") : null;
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="underline underline-offset-4 hover:no-underline"
+      className={`group inline-flex cursor-pointer items-center border-b border-current leading-none ${className}`}
     >
-      {children}
+      {letters ? (
+        <span aria-hidden="true" className="inline-flex">
+          {letters.map((letter, index) => (
+            <span
+              key={`${letter}-${index}`}
+              className="relative inline-block h-[1.2em] overflow-hidden leading-[1.2em]"
+            >
+              <span
+                className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1/2"
+                style={{ transitionDelay: `${index * 18}ms` }}
+              >
+                <span className="block h-[1.2em] leading-[1.2em]">
+                  {letter === " " ? "\u00a0" : letter}
+                </span>
+                <span className="block h-[1.2em] leading-[1.2em]">
+                  {letter === " " ? "\u00a0" : letter}
+                </span>
+              </span>
+            </span>
+          ))}
+        </span>
+      ) : (
+        children
+      )}
+      {letters ? <span className="sr-only">{children}</span> : null}
     </a>
   );
 }
@@ -268,14 +317,30 @@ export default function MinimalPortfolio() {
             Portfolio
           </p>
           <div className="flex items-center gap-4">
-            <Image
-              src="/me.png"
-              alt="Profile picture of Jnanesh"
-              width={64}
-              height={64}
-              className="h-16 w-16 rounded-full border border-zinc-300 object-cover dark:border-zinc-600"
-              priority
-            />
+            <div className="group relative h-16 w-16 [perspective:900px]">
+              <div className="relative h-full w-full [transform-style:preserve-3d] rounded-full border border-zinc-300 transition-transform duration-700 ease-in-out group-hover:[transform:rotateY(180deg)] dark:border-zinc-600">
+                <div className="absolute inset-0 [backface-visibility:hidden]">
+                  <Image
+                    src="/me.png"
+                    alt="Profile picture of Jnanesh"
+                    fill
+                    sizes="64px"
+                    className="rounded-full border-none object-cover"
+                    priority
+                  />
+                </div>
+                <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                  <Image
+                    src="/me3.png"
+                    alt="Alternate profile picture of Jnanesh"
+                    fill
+                    sizes="64px"
+                    className="rounded-full border-none object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
             <h1 className="font-pixelify text-4xl font-semibold tracking-tight md:text-5xl">
               Jnanesh
             </h1>
@@ -285,8 +350,12 @@ export default function MinimalPortfolio() {
             services, automation tools, and developer utilities.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <ExternalLink href="/resume.pdf">Resume</ExternalLink>
-            <ExternalLink href="https://github.com/jtuluve">GitHub</ExternalLink>
+            <ExternalLink href="/resume.pdf" animated>
+              Resume
+            </ExternalLink>
+            <ExternalLink href="https://github.com/jtuluve" animated>
+              GitHub
+            </ExternalLink>
           </div>
         </header>
 
@@ -296,10 +365,10 @@ export default function MinimalPortfolio() {
           <div className="mt-5 flex flex-wrap gap-2">
             {coreSkills.map((skill) => (
               <span
-                key={skill}
-                className="rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 dark:border-zinc-700 dark:text-zinc-200"
+                key={skill.name}
+                className={`rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 transition-colors transition-transform duration-150 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-400 dark:hover:text-zinc-50 ${skill.hoverBg}`}
               >
-                {skill}
+                {skill.name}
               </span>
             ))}
           </div>
@@ -470,9 +539,20 @@ export default function MinimalPortfolio() {
                     </div>
                   ) : null}
                 </div>
-                <p className="mt-1 text-zinc-700 dark:text-zinc-300">
-                  {work.company}
-                </p>
+                {work.logoSrc ? (
+                  <p className="mt-1 flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
+                    <img
+                      src={work.logoSrc}
+                      alt=""
+                      className="h-[1em] w-[1em] shrink-0 rounded object-cover"
+                    />
+                    <span>{work.company}</span>
+                  </p>
+                ) : (
+                  <p className="mt-1 text-zinc-700 dark:text-zinc-300">
+                    {work.company}
+                  </p>
+                )}
                 <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
                   {minimalWorkDescriptions[work.title] ?? work.description}
                 </p>
@@ -500,9 +580,13 @@ export default function MinimalPortfolio() {
             work.
           </p>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <ExternalLink href="mailto:jtuluve@gmail.com">Email</ExternalLink>
-            <ExternalLink href="https://github.com/jtuluve">GitHub</ExternalLink>
-            <ExternalLink href="https://www.linkedin.com/in/jtuluve">
+            <ExternalLink href="mailto:jtuluve@gmail.com" animated>
+              Email
+            </ExternalLink>
+            <ExternalLink href="https://github.com/jtuluve" animated>
+              GitHub
+            </ExternalLink>
+            <ExternalLink href="https://www.linkedin.com/in/jtuluve" animated>
               LinkedIn
             </ExternalLink>
           </div>
