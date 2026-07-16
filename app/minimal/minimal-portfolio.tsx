@@ -476,7 +476,7 @@ export default function MinimalPortfolio() {
                 <details
                   key={experienceKey}
                   open={isExpanded}
-                  className="-mx-3 rounded border-b border-zinc-200 px-3 py-3 transition-colors hover:bg-zinc-50 last:border-b-0 dark:border-zinc-800 dark:hover:bg-zinc-900"
+                  className="minimal-experience-card -mx-3 rounded border-b border-zinc-200 px-3 py-3 transition-colors hover:bg-zinc-50 last:border-b-0 dark:border-zinc-800 dark:hover:bg-zinc-900"
                 >
                   <summary
                     className="relative flex cursor-pointer list-none flex-col gap-1 pr-4 marker:hidden sm:flex-row sm:items-start sm:justify-between"

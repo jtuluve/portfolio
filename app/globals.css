@@ -201,3 +201,35 @@ body:has(.minimal-page) {
 .minimal-page summary {
   cursor: pointer;
 }
+
+.minimal-experience-card {
+  position: relative;
+  transition-duration: 160ms;
+  transition-property: background-color, border-color, transform;
+  transition-timing-function: ease-out;
+}
+
+.minimal-experience-card::before {
+  background: currentColor;
+  content: "";
+  height: calc(100% - 1.5rem);
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0.75rem;
+  transform: scaleY(0.55);
+  transform-origin: center;
+  transition: opacity 160ms ease-out, transform 160ms ease-out;
+  width: 1px;
+}
+
+.minimal-experience-card:hover,
+.minimal-experience-card:focus-within {
+  transform: translateX(2px);
+}
+
+.minimal-experience-card:hover::before,
+.minimal-experience-card:focus-within::before {
+  opacity: 0.22;
+  transform: scaleY(1);
+}
