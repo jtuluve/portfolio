@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import {
   ChevronDown,
   Code,
+  Medal,
   Moon,
   SquareArrowOutUpRight,
   Sun,
@@ -82,11 +83,20 @@ const minimalWorkDescriptions: Record<string, string> = {
   "Zomato Integration Tool": "Automated restaurant order sync.",
 };
 
-const achievements: Array<{
+type Achievement = {
   result: string;
   title: string;
   context: string;
-}> = [
+};
+
+type AchievementPlace = 1 | 2 | 3;
+
+const achievements: Achievement[] = [
+  {
+    result: "Runner-up",
+    title: "HackToFuture 4.0 Hackathon",
+    context: "24-hour hackathon organized by SJEC and EG.",
+  },
   {
     result: "Second runner-up",
     title: "Ainnovation 2025 Hackathon",
@@ -99,11 +109,6 @@ const achievements: Array<{
     context: "36-hour blockchain hackathon.",
   },
   {
-    result: "Runner-up",
-    title: "HackToFuture 4.0 Hackathon",
-    context: "24-hour hackathon organized by SJEC and EG.",
-  },
-  {
     result: "First place",
     title: "Debugging at Aakar 2025",
     context: "Competitive debugging event.",
@@ -112,6 +117,16 @@ const achievements: Array<{
     result: "First place",
     title: "Blind Coding at Aakar 2025",
     context: "Programming contest focused on accuracy without visual feedback.",
+  },
+  {
+    result: "First place",
+    title: "Error Debugging at Saavishkar",
+    context: "Debugging competition.",
+  },
+  {
+    result: "First place",
+    title: "Debugging at Aakar 2024",
+    context: "AJIET debugging event.",
   },
   {
     result: "Runner-up",
@@ -127,16 +142,6 @@ const achievements: Array<{
     result: "Second place",
     title: "Web Designing at Saavishkar",
     context: "MIT Kundapura web design competition.",
-  },
-  {
-    result: "First place",
-    title: "Error Debugging at Saavishkar",
-    context: "Debugging competition.",
-  },
-  {
-    result: "First place",
-    title: "Debugging at Aakar 2024",
-    context: "AJIET debugging event.",
   },
   {
     result: "Award recipient",
@@ -156,6 +161,55 @@ const achievements: Array<{
       "Conducted workshops on Git, GitHub, MongoDB, and UiPath with practical industry workflows.",
   },
 ];
+
+function getAchievementPlace(result: string): AchievementPlace | null {
+  const normalizedResult = result.toLowerCase();
+
+  if (normalizedResult.includes("first")) {
+    return 1;
+  }
+
+  if (
+    normalizedResult.includes("runner-up") ||
+    normalizedResult.includes("second")
+  ) {
+    return normalizedResult.includes("second runner-up") ? 3 : 2;
+  }
+
+  return null;
+}
+
+function getAchievementPlaceLabel(place: AchievementPlace) {
+  return `${place}${place === 1 ? "st" : place === 2 ? "nd" : "rd"}`;
+}
+
+function getAchievementPlaceStyle(place: AchievementPlace) {
+  if (place === 1) {
+    return "text-amber-500 dark:text-amber-300";
+  }
+
+  if (place === 2) {
+    return "text-zinc-400 dark:text-zinc-300";
+  }
+
+  return "text-[#9c6a3a] dark:text-[#c89055]";
+}
+
+function AchievementPlaceMark({ place }: { place: AchievementPlace }) {
+  const label = getAchievementPlaceLabel(place);
+
+  return (
+    <span
+      aria-label={`${label} place`}
+      className={`mt-1 inline-flex size-6 shrink-0 items-center justify-center ${getAchievementPlaceStyle(
+        place
+      )}`}
+      title={`${label} place`}
+    >
+      <Medal className="size-5" strokeWidth={2.2} aria-hidden="true" />
+    </span>
+  );
+}
 
 function ExternalLink({
   href,
@@ -529,19 +583,28 @@ export default function MinimalPortfolio() {
             Achievements
           </h2>
           <div className="mt-5 space-y-5">
-            {visibleAchievements.map((achievement) => (
-              <article
-                key={`${achievement.result}-${achievement.title}`}
-                className="max-w-2xl"
-              >
-                <h3 className="text-base font-semibold leading-7 text-zinc-950 dark:text-zinc-50">
-                  {achievement.result} - {achievement.title}
-                </h3>
-                <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
-                  {achievement.context}
-                </p>
-              </article>
-            ))}
+            {visibleAchievements.map((achievement) => {
+              const place = getAchievementPlace(achievement.result);
+
+              return (
+                <article
+                  key={`${achievement.result}-${achievement.title}`}
+                  className="flex max-w-2xl gap-3"
+                >
+                  {place !== null ? (
+                    <AchievementPlaceMark place={place} />
+                  ) : null}
+                  <div>
+                    <h3 className="text-base font-semibold leading-7 text-zinc-950 dark:text-zinc-50">
+                      {achievement.result} - {achievement.title}
+                    </h3>
+                    <p className="mt-0.5 text-sm font-medium leading-6 text-zinc-500 dark:text-zinc-400">
+                      {achievement.context}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
           {achievements.length > initialAchievementCount ? (
             <ViewMoreButton
