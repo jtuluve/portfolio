@@ -192,7 +192,7 @@ html.lenis {
 }
 
 body:has(.minimal-page) {
-  cursor: default;
+  cursor: url(/cur/default.png), default;
 }
 
 .minimal-page .cursor-pointer,

@@ -243,6 +243,36 @@ function IconLink({
   );
 }
 
+function NameFlip() {
+  const primaryName = "Jnanesh";
+  const handle = "jtuluve";
+
+  return (
+    <span
+      tabIndex={0}
+      aria-label={`${primaryName}, ${handle}`}
+      title={handle}
+      className="group/name relative inline-block h-[1.05em] cursor-default outline-none [perspective:900px]"
+    >
+      <span aria-hidden="true" className="invisible block">
+        {primaryName}
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 block [transform-style:preserve-3d] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/name:[transform:rotateX(180deg)] group-focus-visible/name:[transform:rotateX(180deg)] motion-reduce:transition-none"
+      >
+        <span className="absolute inset-0 block [backface-visibility:hidden]">
+          {primaryName}
+        </span>
+        <span className="absolute inset-0 block text-zinc-500 [transform:rotateX(180deg)] [backface-visibility:hidden] dark:text-zinc-400">
+          {handle}
+        </span>
+      </span>
+      <span className="sr-only">{primaryName}</span>
+    </span>
+  );
+}
+
 function ViewMoreButton({
   expanded,
   onClick,
@@ -393,7 +423,7 @@ export default function MinimalPortfolio() {
               </div>
             </div>
             <h1 className="font-pixelify text-4xl font-semibold tracking-tight md:text-5xl">
-              Jnanesh
+              <NameFlip />
             </h1>
           </div>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
