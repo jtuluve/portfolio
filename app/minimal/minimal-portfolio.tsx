@@ -442,7 +442,7 @@ export default function MinimalPortfolio() {
 
         
         <section className="border-b border-zinc-300 py-8 dark:border-zinc-700">
-          <h2 className="font-pixelify text-2xl font-semibold">Skills</h2>
+          <h2 className="font-pixelify text-2xl font-semibold">Tech Stack</h2>
           <div className="mt-5 flex flex-wrap gap-2">
             {coreSkills.map((skill) => (
               <span
