@@ -14,11 +14,37 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 const coreSkills = [
-  { name: "Python", hoverBg: "hover:bg-[#ecf3ff]" },
-  { name: "JavaScript", hoverBg: "hover:bg-[#fffef3]" },
-  { name: "TypeScript", hoverBg: "hover:bg-[#edf2ff]" },
-  { name: "Next.js", hoverBg: "hover:bg-[#f6f6ff]" },
-  { name: "MongoDB", hoverBg: "hover:bg-[#effbf3]" },
+  {
+    name: "Python",
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+    hoverBg: "hover:bg-[#ecf3ff] dark:hover:bg-[#17243a]",
+  },
+  {
+    name: "JavaScript",
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    hoverBg: "hover:bg-[#fffef3] dark:hover:bg-[#302b16]",
+  },
+  {
+    name: "TypeScript",
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    hoverBg: "hover:bg-[#edf2ff] dark:hover:bg-[#1a2440]",
+  },
+  {
+    name: "Next.js",
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    logoClass: "dark:invert",
+    hoverBg: "hover:bg-[#f6f6ff] dark:hover:bg-[#252538]",
+  },
+  {
+    name: "MongoDB",
+    logoSrc:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+    hoverBg: "hover:bg-[#effbf3] dark:hover:bg-[#183222]",
+  },
 ];
 const initialProjectCount = 3;
 const initialWorkCount = 3;
@@ -217,6 +243,31 @@ function IconLink({
   );
 }
 
+function ViewMoreButton({
+  expanded,
+  onClick,
+}: {
+  expanded: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={expanded}
+      className="group mt-6 inline-flex items-center gap-2 border-b border-zinc-400 pb-1 text-sm font-medium text-zinc-800 transition-colors hover:border-zinc-900 hover:text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:border-zinc-600 dark:text-zinc-200 dark:hover:border-zinc-100 dark:hover:text-zinc-50 dark:focus-visible:ring-zinc-400 dark:focus-visible:ring-offset-zinc-950"
+    >
+      <span>{expanded ? "View less" : "View more"}</span>
+      <ChevronDown
+        className={`size-3.5 transition-transform duration-200 ${
+          expanded ? "rotate-180" : "translate-y-px group-hover:translate-y-0.5"
+        }`}
+        aria-hidden="true"
+      />
+    </button>
+  );
+}
+
 export default function MinimalPortfolio() {
   const [isDark, setIsDark] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -366,9 +417,19 @@ export default function MinimalPortfolio() {
             {coreSkills.map((skill) => (
               <span
                 key={skill.name}
-                className={`rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 transition-colors transition-transform duration-150 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-400 dark:hover:text-zinc-50 ${skill.hoverBg}`}
+                className={`group relative inline-flex min-w-24 cursor-pointer items-center justify-center overflow-hidden rounded border border-zinc-300 px-2.5 py-1 text-sm text-zinc-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-400 dark:hover:text-zinc-50 ${skill.hoverBg}`}
               >
-                {skill.name}
+                <span className="transition-all duration-150 group-hover:-translate-y-2 group-hover:opacity-0">
+                  {skill.name}
+                </span>
+                <img
+                  src={skill.logoSrc}
+                  alt=""
+                  aria-hidden="true"
+                  className={`absolute h-5 w-5 translate-y-2 object-contain opacity-0 transition-all duration-150 group-hover:translate-y-0 group-hover:opacity-100 ${
+                    skill.logoClass ?? ""
+                  }`}
+                />
               </span>
             ))}
           </div>
@@ -453,13 +514,10 @@ export default function MinimalPortfolio() {
             ))}
           </div>
           {achievements.length > initialAchievementCount ? (
-            <button
-              type="button"
+            <ViewMoreButton
+              expanded={showAllAchievements}
               onClick={() => setShowAllAchievements((value) => !value)}
-              className="mt-6 rounded border border-zinc-300 px-3 py-1.5 text-sm text-zinc-800 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
-            >
-              {showAllAchievements ? "View less" : "View more"}
-            </button>
+            />
           ) : null}
         </section>
 
@@ -502,13 +560,10 @@ export default function MinimalPortfolio() {
             ))}
           </div>
           {projects.length > initialProjectCount ? (
-            <button
-              type="button"
+            <ViewMoreButton
+              expanded={showAllProjects}
               onClick={() => setShowAllProjects((value) => !value)}
-              className="mt-6 rounded border border-zinc-300 px-3 py-1.5 text-sm text-zinc-800 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
-            >
-              {showAllProjects ? "View less" : "View more"}
-            </button>
+            />
           ) : null}
         </section>
 
@@ -563,13 +618,10 @@ export default function MinimalPortfolio() {
             ))}
           </div>
           {works.length > initialWorkCount ? (
-            <button
-              type="button"
+            <ViewMoreButton
+              expanded={showAllWorks}
               onClick={() => setShowAllWorks((value) => !value)}
-              className="mt-6 rounded border border-zinc-300 px-3 py-1.5 text-sm text-zinc-800 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
-            >
-              {showAllWorks ? "View less" : "View more"}
-            </button>
+            />
           ) : null}
         </section>
 
