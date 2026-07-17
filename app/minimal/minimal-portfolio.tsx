@@ -83,6 +83,18 @@ const minimalWorkDescriptions: Record<string, string> = {
   "Zomato Integration Tool": "Automated restaurant order sync.",
 };
 
+const formatExperienceParagraph = (item: (typeof experience)[number]) => {
+  if (item.points.length === 0) {
+    return item.shortDesc;
+  }
+
+  const extraDetails = item.points
+    .map((point) => point.replace(/[.]+$/, ""))
+    .join("; ");
+
+  return `${item.shortDesc} ${extraDetails}.`;
+};
+
 type Achievement = {
   result: string;
   title: string;
@@ -485,10 +497,14 @@ export default function MinimalPortfolio() {
             services, automation tools, and developer utilities.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <ExternalLink href="/resume.pdf" animated>
+            <ExternalLink href="/resume.pdf" animated className="text-base">
               Resume
             </ExternalLink>
-            <ExternalLink href="https://github.com/jtuluve" animated>
+            <ExternalLink
+              href="https://github.com/jtuluve"
+              animated
+              className="text-base"
+            >
               GitHub
             </ExternalLink>
           </div>
@@ -506,10 +522,12 @@ export default function MinimalPortfolio() {
                 <span className="transition-all duration-150 group-hover:-translate-y-2 group-hover:opacity-0">
                   {skill.name}
                 </span>
-                <img
+                <Image
                   src={skill.logoSrc}
                   alt=""
                   aria-hidden="true"
+                  width={20}
+                  height={20}
                   className={`absolute h-5 w-5 translate-y-2 object-contain opacity-0 transition-all duration-150 group-hover:translate-y-0 group-hover:opacity-100 ${
                     skill.logoClass ?? ""
                   }`}
@@ -548,9 +566,11 @@ export default function MinimalPortfolio() {
                   <div>
                     <h3 className="text-lg font-semibold">{item.role}</h3>
                     <p className="mt-1 flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
-                      <img
+                      <Image
                         src={item.logoSrc}
                         alt=""
+                        width={16}
+                        height={16}
                         className="h-[1em] w-[1em] shrink-0 rounded object-cover"
                       />
                       <span>{item.company}</span>
@@ -562,15 +582,8 @@ export default function MinimalPortfolio() {
                 </summary>
                 <div className="mt-3">
                   <p className="leading-7 text-zinc-800 dark:text-zinc-200">
-                    {item.shortDesc}
+                    {formatExperienceParagraph(item)}
                   </p>
-                  {item.points.length > 0 ? (
-                    <ul className="mt-3 list-disc space-y-2 pl-5 text-zinc-800 dark:text-zinc-200">
-                      {item.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  ) : null}
                 </div>
               </details>
               );
@@ -689,9 +702,11 @@ export default function MinimalPortfolio() {
                 </div>
                 {work.logoSrc ? (
                   <p className="mt-1 flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
-                    <img
+                    <Image
                       src={work.logoSrc}
                       alt=""
+                      width={16}
+                      height={16}
                       className="h-[1em] w-[1em] shrink-0 rounded object-cover"
                     />
                     <span>{work.company}</span>
@@ -725,29 +740,47 @@ export default function MinimalPortfolio() {
             work.
           </p>
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <ExternalLink href="mailto:jtuluve@gmail.com" animated>
+            <ExternalLink
+              href="mailto:jtuluve@gmail.com"
+              animated
+              className="text-base"
+            >
               Email
             </ExternalLink>
-            <ExternalLink href="https://github.com/jtuluve" animated>
+            <ExternalLink
+              href="https://github.com/jtuluve"
+              animated
+              className="text-base"
+            >
               GitHub
             </ExternalLink>
-            <ExternalLink href="https://www.linkedin.com/in/jtuluve" animated>
+            <ExternalLink
+              href="https://www.linkedin.com/in/jtuluve"
+              animated
+              className="text-base"
+            >
               LinkedIn
             </ExternalLink>
           </div>
         </section>
       </div>
       {preview ? (
-        <img
-          src={preview.src}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 rounded border border-zinc-200 bg-white object-cover shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block"
+        <div
+          className="pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 overflow-hidden rounded border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block"
           style={{
             right: `calc(50% + ${contentRef.current?.offsetWidth ?? 0}px / 2 + 24px)`,
             top: preview.y,
           }}
-        />
+        >
+          <Image
+            src={preview.src}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="224px"
+            className="object-cover"
+          />
+        </div>
       ) : null}
     </main>
   );
