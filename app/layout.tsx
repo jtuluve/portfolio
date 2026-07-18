@@ -2,8 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Oxanium, Saira } from "next/font/google"
 import "./globals.css"
-import LoadingScreen from "@/components/ui/loading-screen"
-import { LoadingProvider } from "@/components/loading-provider"
 
 const saira = Saira({
   subsets: ["latin"],
@@ -31,10 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${saira.variable} ${oxanium.variable}`}>
       <body className="font-pixelify antialiased overflow-x-hidden cursor-default">
-        <LoadingProvider>
-          <LoadingScreen />
-          {children}
-        </LoadingProvider>
+        {children}
       </body>
     </html>
   )

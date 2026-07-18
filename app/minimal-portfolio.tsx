@@ -17,33 +17,28 @@ import { useEffect, useRef, useState } from "react";
 const coreSkills = [
   {
     name: "Python",
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+    logoSrc: "/devicons/python.svg",
     hoverBg: "hover:bg-[#ecf3ff] dark:hover:bg-[#17243a]",
   },
   {
     name: "JavaScript",
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+    logoSrc: "/devicons/javascript.svg",
     hoverBg: "hover:bg-[#fffef3] dark:hover:bg-[#302b16]",
   },
   {
     name: "TypeScript",
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+    logoSrc: "/devicons/typescript.svg",
     hoverBg: "hover:bg-[#edf2ff] dark:hover:bg-[#1a2440]",
   },
   {
     name: "Next.js",
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    logoSrc: "/devicons/nextjs.svg",
     logoClass: "dark:invert",
     hoverBg: "hover:bg-[#f6f6ff] dark:hover:bg-[#252538]",
   },
   {
     name: "MongoDB",
-    logoSrc:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+    logoSrc: "/devicons/mongodb.svg",
     hoverBg: "hover:bg-[#effbf3] dark:hover:bg-[#183222]",
   },
 ];
@@ -468,7 +463,7 @@ export default function MinimalPortfolio() {
               <div className="relative h-full w-full [transform-style:preserve-3d] rounded-full border border-zinc-300 transition-transform duration-700 ease-in-out group-hover:[transform:rotateY(180deg)] dark:border-zinc-600">
                 <div className="absolute inset-0 [backface-visibility:hidden]">
                   <Image
-                    src="/me.png"
+                    src="/avatar-me.webp"
                     alt="Profile picture of Jnanesh"
                     fill
                     sizes="64px"
@@ -478,7 +473,7 @@ export default function MinimalPortfolio() {
                 </div>
                 <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
                   <Image
-                    src="/me3.png"
+                    src="/avatar-me-alt.webp"
                     alt="Alternate profile picture of Jnanesh"
                     fill
                     sizes="64px"
