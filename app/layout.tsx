@@ -3,6 +3,11 @@ import type { Metadata } from "next"
 import { Oxanium, Saira } from "next/font/google"
 import "./globals.css"
 
+const siteUrl = "https://jtuluve.is-a.dev"
+const siteTitle = "Jnanesh | Software Engineer & Full-Stack Developer"
+const siteDescription =
+  "Portfolio of Jnanesh, a software engineer building full-stack web applications, backend services, automation tools, and developer utilities."
+
 const saira = Saira({
   subsets: ["latin"],
   display: "swap",
@@ -17,8 +22,63 @@ const oxanium = Oxanium({
 })
 
 export const metadata: Metadata = {
-  title: "Jnanesh",
-  description: "Portfolio of Jnanesh"
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: "%s | Jnanesh",
+  },
+  description: siteDescription,
+  applicationName: "Jnanesh Portfolio",
+  authors: [{ name: "Jnanesh", url: siteUrl }],
+  creator: "Jnanesh",
+  publisher: "Jnanesh",
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Jnanesh",
+    "software engineer",
+    "full-stack developer",
+    "web developer",
+    "Next.js developer",
+    "backend developer",
+    "automation developer",
+    "Mangaluru",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: "Jnanesh Portfolio",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Jnanesh — Software Engineer and Full-Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 }
 
 export default function RootLayout({
