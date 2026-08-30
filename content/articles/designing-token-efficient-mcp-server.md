@@ -51,4 +51,8 @@ The result of this design? **A reduction in initial tool overhead from 7,500+ to
 
 This pattern is most useful for MCP servers with many tools, especially when a typical request needs only a few of them. It adds one or two tool calls for discovery, but in exchange, it keeps the initial context much smaller and leaves more room for the user's task.
 
+## The Tradeoff
+
+While it reduces the tool overhead, it also increases latency since the LLM requires additional tool calls. So it is upto the team to decide the priority.
+
 *P.S. Claude acts funny now: it uses its own `search_tools` tool to find Drishti's `search_tools` tool, then calls that tool to find the actual tools. XD*
