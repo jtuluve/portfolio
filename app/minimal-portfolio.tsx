@@ -376,6 +376,12 @@ export default function MinimalPortfolio() {
     ? projects
     : projects.slice(0, initialProjectCount);
   const visibleWorks = showAllWorks ? works : works.slice(0, initialWorkCount);
+  const previewSources = [
+    ...new Set([
+      ...visibleProjects.map((project) => project.image),
+      ...visibleWorks.map((work) => work.imageUrl),
+    ]),
+  ];
   const visibleAchievements = showAllAchievements
     ? achievements
     : achievements.slice(0, initialAchievementCount);
@@ -769,24 +775,31 @@ export default function MinimalPortfolio() {
           </div>
         </section>
       </div>
-      {preview ? (
-        <div
-          className="pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 overflow-hidden rounded border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block"
-          style={{
-            right: `calc(50% + ${contentRef.current?.offsetWidth ?? 0}px / 2 + 24px)`,
-            top: preview.y,
-          }}
-        >
+      <div
+        className={`pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 overflow-hidden rounded border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block ${
+          preview ? "visible" : "invisible"
+        }`}
+        style={{
+          right: `calc(50% + ${contentRef.current?.offsetWidth ?? 0}px / 2 + 24px)`,
+          top: preview?.y ?? -1000,
+        }}
+        aria-hidden="true"
+      >
+        {previewSources.map((source) => (
           <Image
-            src={preview.src}
+            key={source}
+            src={source}
             alt=""
-            aria-hidden="true"
             fill
             sizes="224px"
-            className="object-cover"
+            loading="lazy"
+            fetchPriority="low"
+            className={`object-cover transition-opacity ${
+              preview?.src === source ? "opacity-100" : "opacity-0"
+            }`}
           />
-        </div>
-      ) : null}
+        ))}
+      </div>
     </main>
   );
 }

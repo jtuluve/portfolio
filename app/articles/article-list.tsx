@@ -23,6 +23,13 @@ export default function ArticleList({
     src: string;
     y: number;
   } | null>(null);
+  const previewSources = [
+    ...new Set(
+      articles
+        .map((article) => article.coverImage)
+        .filter((source): source is string => Boolean(source)),
+    ),
+  ];
 
   const updatePreviewPosition = (src: string, y: number) => {
     setPreview({ src, y });
@@ -87,25 +94,31 @@ export default function ArticleList({
         ))}
       </section>
 
-      {preview ? (
-        <div
-          className="pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 overflow-hidden rounded border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block"
-          style={{
-            right: `calc(50% + ${listRef.current?.offsetWidth ?? 0}px / 2 + 24px)`,
-            top: preview.y,
-          }}
-        >
+      <div
+        className={`pointer-events-none fixed z-20 hidden aspect-video w-56 -translate-y-1/2 overflow-hidden rounded border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900 xl:block ${
+          preview ? "visible" : "invisible"
+        }`}
+        style={{
+          right: `calc(50% + ${listRef.current?.offsetWidth ?? 0}px / 2 + 24px)`,
+          top: preview?.y ?? -1000,
+        }}
+        aria-hidden="true"
+      >
+        {previewSources.map((source) => (
           <Image
-            src={preview.src}
+            key={source}
+            src={source}
             alt=""
-            aria-hidden="true"
             fill
             sizes="224px"
-            className="object-cover"
+            loading="lazy"
+            fetchPriority="low"
+            className={`object-cover transition-opacity ${
+              preview?.src === source ? "opacity-100" : "opacity-0"
+            }`}
           />
-        </div>
-      ) : null}
+        ))}
+      </div>
     </>
   );
 }
-
