@@ -31,11 +31,11 @@ These tools are now available for you to call directly.
 </functions>
 ```
 
-The LLM now has access to the `get_news` tool and can call it, while all the other tools remain unloaded. This saves a large number of tokens, improves the quality of the response, and leaves more context available for deep research. Note that this is not part of the MCP itself. It was a custom solution from the Anthropic team to save tokens.
+The LLM now has access to the `get_news` tool and can call it, while all the other tools remain unloaded. This saves a large number of tokens, improves the quality of the response, and leaves more context available for deep research. Note that this is not part of the MCP itself. It was a custom solution from the Anthropic team to save tokens, and Anthropic describes the same pattern in its article on [advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use).
 
 ## My approach
 
-As I continued developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev) MCP, the number of tools grew over time. This meant that every tool's description and schema were loaded at once if the MCP was connected to any client (other than Claude) or if a user was using the MCP in their own project. To solve this issue, I followed Claude's design but added my own twist. I made three tools directly accessible in the MCP:
+As I continued developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev) MCP, the number of tools grew over time. This meant that every tool's description and schema were loaded at once by clients without built-in deferred tool loading. A few clients, including Claude, avoided this with their own tool-search mechanisms, but users working with other clients or integrating the MCP into their own projects still faced the full initial overhead. To solve this issue, I followed Claude's design but added my own twist. I made three tools directly accessible in the MCP:
 
 1. `search_tools` - search for tools and get the name and short description of each match
 2. `describe_tools` - get the full description and schema of the specified tools
@@ -45,7 +45,7 @@ The `describe_tools` tool is useful because a search may return more matches tha
 
 ## The results
 
-The result of this design? **A reduction in initial tool overhead from 7,500+ tokens to around 280.** Even if the LLM loads 2-3 tools, it takes only ~1,000 tokens. The difference becomes more obvious as you add more tools because the context does not get bloated with every tool definition.
+The result of this design? **A reduction in initial tool overhead from 7,500+ tokens to around 280.** Even when the LLM retrieves the schemas for two or three tools, the total overhead remains around 1,000 tokens. The difference becomes more obvious as you add more tools because the context does not get bloated with every tool definition.
 
 ![Happy LLM](./designing-token-efficient-mcp-server/happy.png)
 
