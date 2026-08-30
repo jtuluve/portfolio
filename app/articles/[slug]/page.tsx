@@ -99,6 +99,10 @@ export async function generateMetadata({
     return {};
   }
 
+  const socialImages = article.coverImage
+    ? [{ url: article.coverImage, alt: article.title }]
+    : undefined;
+
   return {
     title: article.title,
     description: article.description,
@@ -108,6 +112,13 @@ export async function generateMetadata({
       title: article.title,
       description: article.description,
       publishedTime: article.date,
+      images: socialImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      images: article.coverImage ? [article.coverImage] : undefined,
     },
   };
 }
