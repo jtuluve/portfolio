@@ -12,7 +12,7 @@ coverImage: "/articles/designing-token-efficient-mcp-server/cover.jpg"
 
 ## The problem
 
-I was responsible for designing and developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev) MCP. I followed the general patterns of MCP to declare tools with their descriptions and argument schemas. Soon, there were so many tools that their descriptions and argument schemas took up a large chunk of the context. This seemed like a waste of tokens when, most of the time, the LLM uses only 2-4 tools.
+I was responsible for designing and developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev/articles/designing-token-efficient-mcp-server) MCP. I followed the general patterns of MCP to declare tools with their descriptions and argument schemas. Soon, there were so many tools that their descriptions and argument schemas took up a large chunk of the context. This seemed like a waste of tokens when, most of the time, the LLM uses only 2-4 tools.
 
 ![LLMs overloaded](./designing-token-efficient-mcp-server/gif1.gif)
 
@@ -35,7 +35,7 @@ The LLM now has access to the `get_news` tool and can call it, while all the oth
 
 ## My approach
 
-As I continued developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev) MCP, the number of tools grew over time. This meant that every tool's description and schema were loaded at once by clients without built-in deferred tool loading. A few clients, including Claude, avoided this with their own tool-search mechanisms, but users working with other clients or integrating the MCP into their own projects still faced the full initial overhead. To solve this issue, I followed Claude's design but added my own twist. I made three tools directly accessible in the MCP:
+As I continued developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev/articles/designing-token-efficient-mcp-server) MCP, the number of tools grew over time. This meant that every tool's description and schema were loaded at once by clients without built-in deferred tool loading. A few clients, including Claude, avoided this with their own tool-search mechanisms, but users working with other clients or integrating the MCP into their own projects still faced the full initial overhead. To solve this issue, I followed Claude's design but added my own twist. I made three tools directly accessible in the MCP:
 
 1. `search_tools` - search for tools and get the name and short description of each match
 2. `describe_tools` - get the full description and schema of the specified tools
