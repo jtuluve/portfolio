@@ -12,7 +12,7 @@ coverImage: "/articles/designing-token-efficient-mcp-server/cover.jpg"
 
 ## The problem
 
-I was responsible for designing and developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev/articles/designing-token-efficient-mcp-server) MCP. I followed the general patterns of MCP to declare tools with their descriptions and argument schemas. Soon, there were so many tools that their descriptions and argument schemas took up a large chunk of the context. This seemed like a waste of tokens when, most of the time, the LLM uses only 2-4 tools.
+When developing [Drishti](https://drishti.manasija.in/?utm_source=jtuluve.is-a.dev/articles/designing-token-efficient-mcp-server) MCP, we followed the general patterns of MCP to declare tools with their descriptions and argument schemas. As the number of tools grew, those definitions began consuming a noticeable portion of the context window. That quickly started to feel inefficient, especially when most requests only required the LLM to use two to four tools.
 
 ![LLMs overloaded](./designing-token-efficient-mcp-server/gif1.gif)
 
