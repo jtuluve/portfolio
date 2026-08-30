@@ -223,18 +223,20 @@ function ExternalLink({
   children,
   animated = false,
   className = "",
+  newTab = true,
 }: {
   href: string;
   children: ReactNode;
   animated?: boolean;
   className?: string;
+  newTab?: boolean;
 }) {
   if (!animated) {
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noreferrer"
+        target={newTab ? "_blank" : undefined}
+        rel={newTab ? "noreferrer" : undefined}
         className={`underline underline-offset-4 hover:no-underline ${className}`}
       >
         {children}
@@ -247,8 +249,8 @@ function ExternalLink({
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noreferrer"
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noreferrer" : undefined}
       className={`group inline-flex cursor-pointer items-center border-b border-current leading-none ${className}`}
     >
       {letters ? (
@@ -501,6 +503,14 @@ export default function MinimalPortfolio() {
               className="text-base"
             >
               GitHub
+            </ExternalLink>
+            <ExternalLink
+              href="/articles"
+              animated
+              newTab={false}
+              className="text-base"
+            >
+              Articles
             </ExternalLink>
           </div>
         </header>
