@@ -518,6 +518,14 @@ export default function MinimalPortfolio() {
             >
               Articles
             </ExternalLink>
+            <ExternalLink
+              href="https://slides.tuluve.dev"
+              animated
+              newTab={false}
+              className="text-base"
+            >
+              Slides
+            </ExternalLink>
           </div>
         </header>
 
